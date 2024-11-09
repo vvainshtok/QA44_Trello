@@ -1,6 +1,7 @@
 package pages;
 
 import dto.BoardDTO;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +28,15 @@ public class BoardsPage extends BasePage {
     @FindBy (xpath = "//button[@data-testid='create-board-submit-button']")
     WebElement btnCreateSubmit;
 
+    @FindBy(xpath = "//span[@class='QMKgZFIlTLiEJN']")
+    WebElement popUpBoardDeleted;
+
+    @FindBy(xpath = "//button[@data-testid='header-member-menu-button']")
+    WebElement btnHeaderProfile;
+
+    @FindBy(xpath = "//a[@data-testid='manage-account-link']")
+    WebElement btnManageAccount;
+
     public BoardsPage typeBoardTitle(BoardDTO board) {
         btnCreateBoard.click();
         inputBoardTitle.sendKeys(board.getBoardTitle());
@@ -47,5 +57,22 @@ public class BoardsPage extends BasePage {
 
     public boolean isElementClickableBtnCreateSubmit() {
         return isElementClickable(btnCreateSubmit, 3);
+    }
+
+    public boolean isTextPopUpPresent() {
+            return isTextInElementPresent(popUpBoardDeleted, "Board deleted.", 5);
+    }
+
+    public ProfileAndVisibilityPage goToProfileAndVisibility() {
+
+        btnHeaderProfile.click();
+        btnManageAccount.click();
+        return new ProfileAndVisibilityPage(driver);
+    }
+
+
+    public PersonalBoardPage clickElement2ListBoards() {
+        driver.findElement(By.xpath("//ul[@class='boards-page-board-section-list']/li[2]")).click();
+        return new PersonalBoardPage(driver);
     }
 }

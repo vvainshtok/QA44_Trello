@@ -6,11 +6,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
+import static manager.PropertiesReader.getProperty;
+
 public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
         setDriver(driver);
-        driver.get("https://trello.com/home");
+        driver.get(getProperty("login.properties", "url"));
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
 

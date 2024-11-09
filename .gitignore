@@ -15,6 +15,9 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+src/main/resources/test_logs
+src/main/resources/properties
+src/main/java/photos
 
 ### Eclipse ###
 .apt_generated
